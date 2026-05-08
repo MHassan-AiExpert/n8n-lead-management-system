@@ -1,75 +1,109 @@
-# 🎯 n8n Lead Management System
 
-> Automated lead capture and distribution system — 
-> logs to Google Sheets, alerts on Slack, creates 
-> Notion CRM records in real-time.
+# 🚀 n8n Lead Management Automation System
 
-<img width="1156" height="464" alt="image" src="https://github.com/user-attachments/assets/8f40b297-42e8-4b01-b721-4a8e7517192b" />
+Production-ready lead capture and CRM automation workflow built with n8n.
 
+This workflow automatically captures incoming leads from a webhook, stores them in Google Sheets, sends real-time Slack notifications, and creates CRM records in Notion — eliminating manual lead handling and improving response time for sales teams.
 
 ---
 
-## 🚀 What It Does
+# 📌 Overview
 
-When a lead submits a form, this workflow automatically:
+Managing leads manually can slow down sales operations and create inconsistent records across platforms.
 
-- 📊 **Logs to Google Sheets** — permanent lead database
-- 💬 **Alerts team on Slack** — real-time sales notification
-- 📝 **Creates Notion record** — CRM entry with full details
-- ⚡ **All in under 2 seconds** — zero manual work required
+This automation solves that problem by instantly distributing incoming leads to multiple business tools in real-time using n8n.
 
----
-
-## 🔄 Workflow Architecture
-POST /webhook
-│
-▼
-┌─────────────────┐
-│  Google Sheets  │ ← Append lead row
-└────────┬────────┘
-│
-▼
-┌─────────────────┐
-│      Slack      │ ← Alert #new-channel
-└────────┬────────┘
-│
-▼
-┌─────────────────┐
-│     Notion      │ ← Create CRM record
-└─────────────────┘
+The workflow is designed for:
+- Marketing agencies
+- SaaS startups
+- Sales teams
+- CRM automation systems
+- Client onboarding pipelines
+- Contact form automation
 
 ---
 
-## 🛠️ Tech Stack
+# ✨ Features
+
+- ⚡ Real-time lead processing
+- 📊 Automatic Google Sheets lead logging
+- 💬 Instant Slack team notifications
+- 📝 Automatic Notion CRM record creation
+- 🔗 Webhook-based API integration
+- 🔐 Production-ready workflow structure
+- 🚀 Scalable automation architecture
+- 🧩 Easy workflow import into n8n
+
+---
+
+# 🛠️ Tech Stack
 
 | Tool | Purpose |
 |------|---------|
 | **n8n** | Workflow automation engine |
-| **Google Sheets** | Lead database |
-| **Slack** | Real-time team alerts |
-| **Notion** | CRM and lead tracking |
+| **Google Sheets** | Lead database storage |
+| **Slack** | Team notifications |
+| **Notion** | CRM and lead management |
+| **Webhook API** | Incoming lead capture |
 
 ---
 
-## 📸 Screenshots
+# 🔄 Workflow Architecture
 
-### Workflow Canvas
-![Canvas](screenshots/canvas.png)
-
-### Google Sheets — 20+ Live Leads
-![Sheets](screenshots/sheets.png)
-
-### Slack — Real-time Alerts
-![Slack](screenshots/slack.png)
-
-### Notion — CRM Database
-![Notion](screenshots/notion.png)
+```txt
+Webhook Trigger
+      │
+      ▼
+Google Sheets (Lead Database)
+      │
+      ▼
+Slack Notification
+      │
+      ▼
+Notion CRM Record
+```
 
 ---
 
-## 📥 API Input Format
+# 📸 Workflow Preview
 
-Send a `POST` request to the webhook URL:
+## n8n Workflow
+![Workflow](screenshots/workflow-overview.png)
+
+---
+
+## Google Sheets Lead Database
+![Google Sheets](screenshots/google-sheets-output.png)
+
+---
+
+## Slack Real-Time Alerts
+![Slack](screenshots/slack-alert.png)
+
+---
+
+## Notion CRM Records
+![Notion](screenshots/notion-crm.png)
+
+---
+
+# 💡 Business Value
+
+This automation removes repetitive manual work by instantly distributing leads across multiple business systems.
+
+### Benefits:
+- Faster lead response time
+- Centralized lead tracking
+- Improved team communication
+- Better CRM organization
+- Reduced human error
+- Fully automated workflow execution
+
+---
+
+# 📥 API Input Example
+
+Send a `POST` request to the webhook endpoint:
 
 ```json
 {
@@ -81,73 +115,158 @@ Send a `POST` request to the webhook URL:
 }
 ```
 
-### Fields
+---
+
+# 📋 Input Fields
 
 | Field | Type | Required | Description |
-|-------|------|----------|-------------|
-| name | string | ✅ | Full name of lead |
-| email | string | ✅ | Email address |
+|------|------|------|------|
+| name | string | ✅ | Lead full name |
+| email | string | ✅ | Lead email address |
 | company | string | ✅ | Company name |
-| phone | string | ✅ | Phone number |
-| source | string | ✅ | Where lead came from |
+| phone | string | ✅ | Contact number |
+| source | string | ✅ | Lead source platform |
 
 ---
 
-## ⚙️ Setup Instructions
+# ⚙️ Setup Instructions
 
-### Prerequisites
-- n8n account (cloud or self-hosted)
-- Google account
-- Slack workspace
-- Notion account
+## 1️⃣ Import Workflow
 
-### Step 1 — Import workflow
-1. Download `workflow.json`
-2. Open n8n → click **"Import"**
-3. Select the JSON file
+1. Download the workflow JSON file from:
+   ```txt
+   /workflow/lead-management-workflow.json
+   ```
 
-### Step 2 — Connect credentials
-Connect these in n8n Settings → Credentials:
-- ✅ Google Sheets OAuth2
-- ✅ Slack OAuth2
-- ✅ Notion OAuth2
+2. Open n8n
 
-### Step 3 — Set up Google Sheets
-Create a sheet with these headers in Row 1:
+3. Click:
+   - Import Workflow
+   - Select JSON file
+
+---
+
+## 2️⃣ Connect Credentials
+
+Configure the following credentials inside n8n:
+
+- Google Sheets OAuth2
+- Slack OAuth2
+- Notion OAuth2
+
+---
+
+## 3️⃣ Configure Google Sheets
+
+Create a sheet with these headers:
+
+```txt
 name | email | company | phone | source | created_at
+```
 
-### Step 4 — Set up Notion database
-Create a database with these properties:
-Name (Title) | Email (Text) | Company (Text) |
-Phone (Text) | Source (Text) | Created At (Date)
+---
 
-### Step 5 — Connect Notion integration
-1. Go to notion.so → Settings → Connections
+## 4️⃣ Configure Notion Database
+
+Create database properties:
+
+| Property | Type |
+|------|------|
+| Name | Title |
+| Email | Text |
+| Company | Text |
+| Phone | Text |
+| Source | Text |
+| Created At | Date |
+
+---
+
+## 5️⃣ Connect Notion Integration
+
+1. Open Notion Settings
 2. Create new integration
-3. Share your Leads database with the integration
-
-### Step 6 — Activate
-Toggle workflow to **Active** in n8n → copy Production URL → done!
+3. Share database access with integration
 
 ---
 
-## 📊 Performance
+## 6️⃣ Activate Workflow
 
-- ✅ Tested with **20+ leads** in live environment
-- ✅ Processing time: **under 2 seconds** per lead
-- ✅ **3 platforms** updated simultaneously
-- ✅ **24/7 uptime** on production webhook
-- ✅ Zero manual intervention required
+- Enable workflow in n8n
+- Copy production webhook URL
+- Start receiving leads instantly
 
 ---
 
-## 🔐 Security
+# 📊 Performance
 
-For production use, add webhook authentication:
-
-1. Open Webhook node in n8n
-2. Set **Authentication** to Header Auth
-3. Add header: `X-API-Key: your-secret-key`
-4. Include this header in all requests
+- ✅ Tested in live environment
+- ✅ Under 2 seconds processing time
+- ✅ Simultaneous multi-platform updates
+- ✅ 24/7 webhook automation
+- ✅ Zero manual intervention
 
 ---
+
+# 🔐 Security Recommendations
+
+For production deployments:
+
+- Enable Header Authentication
+- Use secure API keys
+- Protect webhook endpoints
+- Store credentials securely
+- Restrict public access where necessary
+
+Example:
+
+```txt
+X-API-Key: your-secret-key
+```
+
+---
+
+# 📂 Project Structure
+
+```txt
+n8n-lead-management-system/
+│
+├── README.md
+├── LICENSE
+├── .gitignore
+│
+├── workflow/
+│   └── lead-management-workflow.json
+│
+├── screenshots/
+│   ├── workflow-overview.png
+│   ├── google-sheets-output.png
+│   ├── slack-alert.png
+│   └── notion-crm.png
+│
+├── docs/
+│
+└── assets/
+    └── banner.png
+```
+
+---
+
+---
+
+# 📄 License
+
+This project is licensed under the MIT License.
+
+---
+
+# 🤝 Contributing
+
+Contributions, improvements, and feature suggestions are welcome.
+
+Feel free to fork the repository and submit pull requests.
+
+---
+
+# ⭐ Support
+
+If you found this project useful, consider starring the repository to support future automation projects.
