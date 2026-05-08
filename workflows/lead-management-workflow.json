@@ -1,0 +1,271 @@
+{
+  "name": "LEAD MANAGEMENT SYSTEM",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "6405e1eb-4c75-486b-8b7b-1993e1208d55",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        0,
+        0
+      ],
+      "id": "5cf78cdb-de32-4f95-b352-a874f6aca374",
+      "name": "Webhook",
+      "webhookId": "6405e1eb-4c75-486b-8b7b-1993e1208d55"
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "12DC9Lt4OoLDs6kAegMZyx7SgzTFHGqre8PBHjWseKK4",
+          "mode": "list",
+          "cachedResultName": "lEAD MANAGEMENT",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/12DC9Lt4OoLDs6kAegMZyx7SgzTFHGqre8PBHjWseKK4/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Sheet1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/12DC9Lt4OoLDs6kAegMZyx7SgzTFHGqre8PBHjWseKK4/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "name": "={{ $json.body.name }}",
+            "email": "={{ $json.body.email }}",
+            "company": "={{ $json.body.company }}",
+            "phone": "={{ $json.body.phone }}",
+            "source": "={{ $json.body.source }}",
+            "created_at": "={{ $now.toISO() }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "name",
+              "displayName": "name",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "email",
+              "displayName": "email",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "company",
+              "displayName": "company",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "phone",
+              "displayName": "phone",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "source",
+              "displayName": "source",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "created_at",
+              "displayName": "created_at",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        208,
+        0
+      ],
+      "id": "3630e63a-a14c-416a-9dbe-cb006d82c3e5",
+      "name": "Append row in sheet",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "Rlf1fLBlO9PWzkvi",
+          "name": "Google Sheets OAuth2 API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "authentication": "oAuth2",
+        "select": "channel",
+        "channelId": {
+          "__rl": true,
+          "value": "C0B2DRHPE20",
+          "mode": "list",
+          "cachedResultName": "new-channel"
+        },
+        "text": "=🔥 New Lead Received!  Name: {{ $json.name }} Email: {{ $json.email }} Company: {{ $json.company }} Phone: {{ $json.phone }} Source: {{ $json.source }} Time: {{ $json.created_at }}",
+        "otherOptions": {}
+      },
+      "type": "n8n-nodes-base.slack",
+      "typeVersion": 2.4,
+      "position": [
+        416,
+        0
+      ],
+      "id": "8c9d4e8c-8253-40c5-a90d-c3945ac2fc7d",
+      "name": "Send a message",
+      "webhookId": "4acbc95c-df01-446e-aac2-e975034004a3",
+      "credentials": {
+        "slackOAuth2Api": {
+          "id": "9M3N4uePtCC0mZZC",
+          "name": "Slack OAuth2 API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "authentication": "oAuth2",
+        "resource": "databasePage",
+        "databaseId": {
+          "__rl": true,
+          "value": "https://www.notion.so/35959d0dcf78807782d4d9fb570a276b?v=35959d0dcf7880ec8073000ccda4e4bd",
+          "mode": "url"
+        },
+        "title": "={{ $('Append row in sheet').item.json.name }}",
+        "propertiesUi": {
+          "propertyValues": [
+            {
+              "key": "Name|title",
+              "title": "={{ $('Append row in sheet').item.json.name }}"
+            },
+            {
+              "key": "Email|rich_text",
+              "richText": true,
+              "text": {
+                "text": [
+                  {
+                    "text": "={{ $('Append row in sheet').item.json.email }}",
+                    "annotationUi": {}
+                  }
+                ]
+              }
+            },
+            {
+              "key": "Phone |rich_text",
+              "textContent": "={{ $('Append row in sheet').item.json.phone }}"
+            },
+            {
+              "key": "Source|phone_number",
+              "phoneValue": "={{ $('Append row in sheet').item.json.source }}"
+            },
+            {
+              "key": "Company|rich_text",
+              "textContent": "={{ $('Append row in sheet').item.json.company }}"
+            },
+            {
+              "key": "Created At|rich_text",
+              "textContent": "= {{ $now.toISO() }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.notion",
+      "typeVersion": 2.2,
+      "position": [
+        624,
+        0
+      ],
+      "id": "c0e00bb0-fc88-4d49-896b-ae48cfef546b",
+      "name": "Create a database page",
+      "credentials": {
+        "notionOAuth2Api": {
+          "id": "sVJCOn81Y2aftQKH",
+          "name": "Notion OAuth2 API"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Append row in sheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Append row in sheet": {
+      "main": [
+        [
+          {
+            "node": "Send a message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send a message": {
+      "main": [
+        [
+          {
+            "node": "Create a database page",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "versionId": "d44702e7-33ff-4dc0-98f5-f665aea523c3",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "a0dc71cf60afb79b7030be4a5ed03a056a0de6e28337114c2c59da2b1f418f68"
+  },
+  "id": "QYyBWlgeq0JFlOK9",
+  "tags": []
+}
