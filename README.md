@@ -6,6 +6,8 @@ Production-ready lead capture and CRM automation workflow built with n8n.
 This workflow automatically captures incoming leads from a webhook, stores them in Google Sheets, sends real-time Slack notifications, and creates CRM records in Notion — eliminating manual lead handling and improving response time for sales teams.
 
 ---
+<img width="1536" height="1024" alt="WORKFLOW AND PIPELINE" src="https://github.com/user-attachments/assets/3ac97991-33b6-4814-acd7-1d36cc8d998b" />
+
 
 # 📌 Overview
 
